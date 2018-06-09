@@ -35,12 +35,15 @@
                 success: function (data) { //call successfull
                     var requestId = data.requestId;
                     const eosOptions = {};
+                    //using hard-coded key in our example since scatter
+                    //https://github.com/EOSEssentials/Scatter currently is deprecated
+                   
                     eos = Eos({ keyProvider: '5JSYsDkyCp3p7zsMcE2Sv7Ep3gii6Vm2wL4ED4dW5j2XQSFm38S', httpEndpoint: 'http://eoshackathon.eastasia.cloudapp.azure.com:8888' })
-                    //const eos = scatter.eos(network, Eos.Localnet, eosOptions, 'http');
+                    //eos = scatter.eos(network, Eos.Localnet, eosOptions, 'http');
                     eos.transaction({
                         actions: [
                             {
-                                account: 'requests',
+                                account: 'requestsabcd',
                                 name: 'addrequest',
                                 authorization: [{
                                     actor: 'johnjohnsons',
