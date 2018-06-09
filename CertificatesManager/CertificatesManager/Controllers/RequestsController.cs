@@ -29,11 +29,18 @@ namespace CertificatesManager.Controllers
         [Authorize]
         public ActionResult Verify(int? id)
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Request request = db.Requests.Find(id);
+            Request request = db
+                .Requests
+                .Include("Certificate")
+                .Where(x => x.Certificate.EOSOwnerAccount == user.EOSAccountName && x.Id == id)
+                .SingleOrDefault();
+
             if (request == null)
             {
                 return HttpNotFound();
@@ -66,11 +73,19 @@ namespace CertificatesManager.Controllers
         [Authorize]
         public ActionResult Delete(int? id)
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Request request = db.Requests.Find(id);
+
+            Request request = db
+               .Requests
+               .Include("Certificate")
+               .Where(x => x.Certificate.EOSOwnerAccount == user.EOSAccountName && x.Id == id)
+               .SingleOrDefault();
+
             if (request == null)
             {
                 return HttpNotFound();
@@ -84,7 +99,18 @@ namespace CertificatesManager.Controllers
         [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
-            Request request = db.Requests.Find(id);
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            Request request = db
+              .Requests
+              .Include("Certificate")
+              .Where(x => x.Certificate.EOSOwnerAccount == user.EOSAccountName && x.Id == id)
+              .SingleOrDefault();
+
+            if (request == null)
+            {
+                return HttpNotFound();
+            }
             db.Requests.Remove(request);
             db.SaveChanges();
             return RedirectToAction("Index");

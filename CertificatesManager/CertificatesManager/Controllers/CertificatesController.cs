@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CertificatesManager.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace CertificatesManager.Controllers
 {
@@ -17,6 +19,8 @@ namespace CertificatesManager.Controllers
         // GET: Certificates
         public ActionResult Index()
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             return View(db.Certificates.ToList());
         }
 
@@ -58,36 +62,36 @@ namespace CertificatesManager.Controllers
             return View(certificate);
         }
 
-        // GET: Certificates/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Certificate certificate = db.Certificates.Find(id);
-            if (certificate == null)
-            {
-                return HttpNotFound();
-            }
-            return View(certificate);
-        }
+        //// GET: Certificates/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Certificate certificate = db.Certificates.Find(id);
+        //    if (certificate == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(certificate);
+        //}
 
-        // POST: Certificates/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Author,PlaceOfIssue,Content,EOSAuthorAccount,EOSOwnerAccount")] Certificate certificate)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(certificate).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(certificate);
-        }
+        //// POST: Certificates/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Name,Author,PlaceOfIssue,Content,EOSAuthorAccount,EOSOwnerAccount")] Certificate certificate)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(certificate).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(certificate);
+        //}
 
         // GET: Certificates/Delete/5
         public ActionResult Delete(int? id)
