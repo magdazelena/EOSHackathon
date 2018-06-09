@@ -5,9 +5,10 @@ body {
     padding-bottom: 20px;
 }
 
-.navbar-brand {
+.navbar-inverse .navbar-brand {
     font-family: 'Permanent Marker', cursive;
-    font-size: 3em;
+    font-size: 2em;
+    color: #c38d94;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -23,7 +24,8 @@ body {
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+input[type="text"],
+input[type="password"],
 select,
 textarea {
     width:500px;

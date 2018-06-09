@@ -7064,6 +7064,7 @@ td.visible-print {
 
     tr.visible-print {
         display: table-row !important;
+        
     }
 
     th.visible-print,
