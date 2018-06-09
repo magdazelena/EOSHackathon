@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CertficatesSocial",
+    "\\CertificatesManager"
   ],
+  "SelectedNode": "\\CertificatesManager\\CertificatesManager.sln",
   "PreviewInSolutionExplorer": false
 }
