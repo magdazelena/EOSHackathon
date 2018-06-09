@@ -30,6 +30,48 @@ namespace CertificatesManager.Controllers
         [HttpPost]
         public ActionResult ProcessVerification(string CertificateHash, int CertificateId, int RequestId)
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            Request r = db.Requests.Include("Certificate").Where(x => x.Id == RequestId && x.Certificate.EOSOwnerAccount == user.EOSAccountName).SingleOrDefault();
+            if(r == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            r.Status = "Verified";
+            db.SaveChanges();
+
+            MailMessage mail = new MailMessage("eoshackathon@irespo.com", r.Email);
+            SmtpClient client = new SmtpClient();
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = "serwer1761616.home.pl";
+            client.Credentials = new NetworkCredential("eoshackathon@irespo.com", "26a;!jl@b4qB");
+            mail.Subject = "Your request has been verified.";
+            mail.Body = "<p>Your request has been verified.</p>"
+                  + "<p>CertificateId: "
+                  + r.CertificateId
+                  + "</p>"
+                  + "<p>Name: "
+                  + r.Certificate.Name
+                  + "</p>"
+                  + "<p>Author: "
+                  + r.Certificate.Author
+                  + "</p>"
+                  + "<p>Place of issue: "
+                  + r.Certificate.PlaceOfIssue
+                  + "</p>"
+                  + "<p>EOS Owner Account: "
+                  + r.Certificate.EOSOwnerAccount
+                  + "</p>"
+                   + "<p>Certificate Hash: "
+                  + CertificateHash
+                  + "</p>"
+                  ;
+            mail.IsBodyHtml = true;
+            client.Send(mail);
+
             return Json(new { success = true});
         }
 
