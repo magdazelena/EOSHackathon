@@ -3,10 +3,10 @@
 using namespace eosio;
 using namespace std;
 
-class requests : public contract {
+class requestsabcd : public contract {
 	using contract::contract;
 public:
-	requests(action_name self) : contract(self)
+	requestsabcd(action_name self) : contract(self)
 		, _requests(_self, _self) {}
 
 	//@abi table 
@@ -55,4 +55,4 @@ public:
 	}
 };
 
-EOSIO_ABI(requests, (addrequest)(delrequest))
+EOSIO_ABI(requestsabcd, (addrequest)(delrequest))

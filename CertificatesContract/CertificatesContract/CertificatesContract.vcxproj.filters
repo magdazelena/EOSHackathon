@@ -4,7 +4,7 @@
     <Filter Include="certificates">
       <UniqueIdentifier>{679a40d2-d865-4305-9d6b-cf85ff9b0d24}</UniqueIdentifier>
     </Filter>
-    <Filter Include="requests">
+    <Filter Include="requestsabcd">
       <UniqueIdentifier>{852ed957-b70c-4cde-975c-b09cecdb2143}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -12,8 +12,8 @@
     <ClCompile Include="certificates.cpp">
       <Filter>certificates</Filter>
     </ClCompile>
-    <ClCompile Include="requests.cpp">
-      <Filter>requests</Filter>
+    <ClCompile Include="requestsabcd.cpp">
+      <Filter>requestsabcd</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -62,7 +62,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClCompile Include="certificates.cpp" />
-    <ClCompile Include="requests.cpp" />
+    <ClCompile Include="requestsabcd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt" />
