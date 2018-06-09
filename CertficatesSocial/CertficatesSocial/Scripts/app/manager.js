@@ -35,13 +35,31 @@
                 success: function (data) { //call successfull
                     var requestId = data.requestId;
                     const eosOptions = {};
-                    const eos = scatter.eos(network, Eos.Localnet, eosOptions, 'http');
-                    eos.contract('requests', {requiredFields}).then(requests => {
-                        requests.transaction(r => {
-                            r.addrequest(requestId, id, eosname, email)
-                        })
-                        
+                    eos = Eos({ keyProvider: '5JSYsDkyCp3p7zsMcE2Sv7Ep3gii6Vm2wL4ED4dW5j2XQSFm38S', httpEndpoint: 'http://eoshackathon.eastasia.cloudapp.azure.com:8888' })
+                    //const eos = scatter.eos(network, Eos.Localnet, eosOptions, 'http');
+                    eos.transaction({
+                        actions: [
+                            {
+                                account: 'requests',
+                                name: 'addrequest',
+                                authorization: [{
+                                    actor: 'johnjohnsons',
+                                    permission: 'active'
+                                }],
+                                data: {
+                                    requestId: requestId,
+                                    certificateId: id,
+                                    requestor: eosname,
+                                    email: email
+                                }
+                            }
+                        ]
                     });
+                    //eos.contract('requests', {requiredFields}).then(requests => {
+                    //    requests.transaction(r => {
+                    //        r.addrequest(requestId, id, eosname, email)
+                    //    })                        
+                    //});
                     
                 },
                 error: function (xhr) {

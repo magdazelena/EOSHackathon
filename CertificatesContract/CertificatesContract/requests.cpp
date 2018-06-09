@@ -19,7 +19,7 @@ public:
 
 		uint64_t primary_key() const { return requestId; }
 
-		EOSLIB_SERIALIZE(request, (requestId)(requestor)(email))
+		EOSLIB_SERIALIZE(request, (requestId)(certificateId)(requestor)(email))
 	};
 
 	multi_index<N(request), request> _requests;
