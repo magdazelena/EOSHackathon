@@ -49,6 +49,10 @@ namespace CertificatesManager.Controllers
         // GET: Certificates/Create
         public ActionResult Create()
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            ViewBag.Author = user.Name;
+            ViewBag.EOSAuthorAccount = user.EOSAccountName;
+
             return View();
         }
 
