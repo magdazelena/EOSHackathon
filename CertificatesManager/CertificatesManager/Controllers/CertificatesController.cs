@@ -67,10 +67,12 @@ namespace CertificatesManager.Controllers
                 cert.EOSOwnerAccount = certificate.EOSOwnerAccount;
                 cert.Name = certificate.Name;
                 cert.PlaceOfIssue = certificate.PlaceOfIssue;
+                cert.Author = user.Name;
+                cert.EOSAuthorAccount = user.EOSAccountName;
 
                 db.Certificates.Add(cert);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { certificateId = cert.Id });
             }
 
             return View(certificate);
