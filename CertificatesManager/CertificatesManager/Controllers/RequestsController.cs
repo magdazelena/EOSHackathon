@@ -49,6 +49,13 @@ namespace CertificatesManager.Controllers
             return View(request);
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult Verify()
+        {
+            return RedirectToAction("Index");
+        }
+
         // POST: Requests/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

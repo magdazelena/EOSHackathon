@@ -218,6 +218,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\certificate_delete.js" />
     <Content Include="Scripts\app\certificate_management.js" />
+    <Content Include="Scripts\app\request_verify.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
