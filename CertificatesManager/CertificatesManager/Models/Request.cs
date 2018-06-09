@@ -11,6 +11,8 @@ namespace CertificatesManager.Models
 
         public string EOSRequestorName { get; set; }
 
-        public string EOSRequestorName { get; set; }
+        public int CertificateId { get; set; }
+
+        public string Email { get; set; }
     }
 }
