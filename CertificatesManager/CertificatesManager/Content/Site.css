@@ -34,3 +34,6 @@ textarea {
 #contentBox{
     min-height: 500px;
 }
+.deleteLink{
+    color: #c38d94;
+}
