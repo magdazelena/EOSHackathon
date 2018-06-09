@@ -20,5 +20,9 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    width:500px;
+    max-width: 80%;
+}
+#contentBox{
+    min-height: 500px;
 }
