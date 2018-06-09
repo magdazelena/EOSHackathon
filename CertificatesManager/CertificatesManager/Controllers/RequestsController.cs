@@ -45,17 +45,21 @@ namespace CertificatesManager.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,EOSRequestorName,CertificateId,Email,Status")] Request request)
+        public ActionResult Create(RequestViewModel request)
         {
             if (ModelState.IsValid)
             {
-                db.Requests.Add(request);
+                Request r = new Request();
+                r.CertificateId = request.CertificateId;
+                r.Email = request.Email;
+                r.EOSRequestorName = request.EOSRequestorName;
+                r.Status = "NEW";
+                db.Requests.Add(r);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { requestId = r.Id });
             }
 
-            return View(request);
+            return new HttpStatusCodeResult(HttpStatusCode.NotFound);
         }
 
         // GET: Requests/Edit/5
