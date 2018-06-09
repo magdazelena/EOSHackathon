@@ -63,7 +63,7 @@
                     //        r.addrequest(requestId, id, eosname, email)
                     //    })                        
                     //});
-                    $('#infomodal').modal();
+                    
                 },
                 error: function (xhr) {
                     //error occurred
