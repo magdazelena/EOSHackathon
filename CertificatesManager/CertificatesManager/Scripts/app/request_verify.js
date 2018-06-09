@@ -5,6 +5,7 @@
 
         var ecc = eosjs_ecc;
         var certificateId = parseInt($("#certId").attr("data-certid"), 10);
+        var requestId = parseInt($("#requestId").attr("data-requestid"), 10);
 
         eos = Eos({ httpEndpoint: 'https://eoshackathon.eastasia.cloudapp.azure.com' });
         eos.getTableRows(
@@ -20,9 +21,17 @@
                 });
                 var hash = row[0].certificateHash;
 
-
-
-                $("#verifyForm").unbind('submit').submit();
+                $.ajax({
+                    type: "POST",
+                    url: '/Requests/ProcessVerification',
+                    data: JSON.stringify({ "CertificateHash": hash, "CertificateId": certificateId, "RequestId": requestId  }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        $("#verifyForm").unbind('submit').submit();
+                    }
+                });
+ 
             });
         
     });

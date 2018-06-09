@@ -26,6 +26,13 @@ namespace CertificatesManager.Controllers
             return View(db.Requests.Include("Certificate").Where(x => x.Certificate.EOSOwnerAccount == user.EOSAccountName).ToList());
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult ProcessVerification(string CertificateHash, int CertificateId, int RequestId)
+        {
+            return Json(new { success = true});
+        }
+
         // GET: Requests/Details/5
         [Authorize]
         public ActionResult Verify(int? id)
