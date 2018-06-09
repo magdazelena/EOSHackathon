@@ -1,8 +1,14 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
 
+.navbar-brand {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3em;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
