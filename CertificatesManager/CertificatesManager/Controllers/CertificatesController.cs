@@ -51,7 +51,7 @@ namespace CertificatesManager.Controllers
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             ViewBag.Author = user.Name;
-            ViewBag.EOSAuthorAccount = user.EOSAccountName;
+            ViewBag.EosAuthor = user.EOSAccountName;
 
             return View();
         }
