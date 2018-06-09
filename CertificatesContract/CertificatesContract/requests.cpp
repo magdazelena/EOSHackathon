@@ -12,6 +12,8 @@ public:
 	//@abi table 
 	struct request {
 		uint64_t requestId;
+		uint64_t certificateId;
+
 		name requestor;
 		string email;
 
@@ -23,7 +25,7 @@ public:
 	multi_index<N(request), request> _requests;
 
 	//@abi action
-	void addrequest(uint64_t requestId, name requestor, string email) {
+	void addrequest(uint64_t requestId, uint64_t certificateId, name requestor, string email) {
 		require_auth(requestor);
 
 		auto iterator = _requests.find(requestId);
@@ -31,6 +33,7 @@ public:
 
 		_requests.emplace(requestor, [&](auto& row) {
 			row.requestId = requestId;
+			row.certificateId = certificateId;
 			row.requestor = requestor;
 			row.email = email;
 		});
