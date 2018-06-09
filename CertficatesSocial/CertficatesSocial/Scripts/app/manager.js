@@ -34,6 +34,15 @@
                 dataType: "json",
                 success: function (data) { //call successfull
                     var requestId = data.requestId;
+                    const eosOptions = {};
+                    const eos = scatter.eos(network, Eos.Localnet, eosOptions, 'http');
+                    eos.contract('requests', {requiredFields}).then(requests => {
+                        requests.transaction(r => {
+                            r.addrequest(requestId, id, eosname, email)
+                        })
+                        
+                    });
+                    
                 },
                 error: function (xhr) {
                     //error occurred
