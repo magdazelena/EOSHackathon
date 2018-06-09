@@ -1,0 +1,31 @@
+﻿.jumbotron {
+    padding: 15px;
+}
+.jumbotron img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.jumbotron h1, .userCertificateList h2{
+    border-bottom: 1px solid gray;
+}
+.userCertificateList h4 {
+    color: gray;
+}
+.userCertificateList .confirmButton {
+    display: inline-block;
+    padding: 15px;
+    margin-top: 2em;
+    background-color: gray;
+    color: white;
+    border-radius: 15px;
+    border-bottom: 2px solid lightgray;
+    transition: all 1s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+    .userCertificateList .confirmButton:hover, .userCertificateList .confirmButton:focus{
+        background-color: lightgray;
+        border-bottom-color: gray;
+        transition: all 1s ease;
+    }
