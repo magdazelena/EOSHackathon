@@ -225,6 +225,8 @@
     <None Include="Properties\PublishProfiles\CertificatesManager - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\CertificatesManager - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\eos.js" />
+    <Content Include="Scripts\eosjs-ecc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
