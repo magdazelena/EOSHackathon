@@ -3,11 +3,11 @@
 using namespace eosio;
 using namespace std;
 
-class certificates : public eosio::contract {
+class certificates : public contract {
+	using contract::contract;
 public:
 	certificates(action_name self) : contract(self)
-		, _certificates(_self, _self)
-		, _requests {}
+		, _certificates(_self, _self) {}
 	
 	//@abi table 
 	struct certificate {
@@ -20,18 +20,10 @@ public:
 		EOSLIB_SERIALIZE(certificate, (certificateId)(certificateHash)(issuer))
 	};
 
-	//@abi table 
-	struct request{
-		uint64_t requestId;
-		name requestor;
-		string email;
-	};
-
 	multi_index<N(certificate), certificate> _certificates;
-	multi_index<N(request), request> _requests;
 
 	//@abi action
-	void addcertificate(uint64_t certificateId,	string certificateHash,	name issuer) {
+	void addcert(uint64_t certificateId, string certificateHash, name issuer) {
 		require_auth(issuer);
 
 		auto iterator = _certificates.find(certificateId);
@@ -47,7 +39,7 @@ public:
 	}
 
 	//@abi action
-	void delcertificate(uint64_t certificateId, name issuer) {
+	void delcert(uint64_t certificateId, name issuer) {
 		require_auth(issuer);
 
 		auto iterator = _certificates.find(certificateId);
@@ -58,35 +50,6 @@ public:
 		print("Certificate deleted");
 
 	}
-
-	//@abi action
-	void addrequest(uint64_t requestId,	name requestor,	string email) {
-		require_auth(requestor);
-
-		auto iterator = _requests.find(requestId);
-		eosio_assert(iterator == _requests.end(), "Request with given Id already exists");
-
-		_requests.emplace(requestor, [&](auto& row) {
-			row.requestId = requestId;
-			row.requestor = requestor;
-			row.email = email;
-		});
-
-		print("Request added");
-	}
-
-	//@abi action
-	void delrequest(uint64_t requestId, name requestor) {
-		require_auth(requestor);
-
-		auto iterator = _requests.find(requestId);
-		eosio_assert(iterator != _requests.end(), "Request with given Id does not exist");
-
-		_requests.erase(iterator);
-
-		print("Request deleted");
-
-	}
 };
 
-// EOSIO_ABI(certificates, (addcertificate)(delcertificate)(addrequest)(delrequest))
+EOSIO_ABI(certificates, (addcert)(delcert))
