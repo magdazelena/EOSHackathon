@@ -1,10 +1,13 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@{
     ViewBag.Title = "Certificates";
 }
 @Styles.Render("~/Content/home_index.css")
 @if (User.Identity.IsAuthenticated)
 {
     <div class="jumbotron">
+
         <h3>Hello, @User.Identity.Name !</h3>
     </div>
 }

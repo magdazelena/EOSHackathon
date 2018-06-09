@@ -80,7 +80,10 @@ namespace CertificatesManager.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "Your EOS account name")]
         public string EOSAccountName { get; set; }
+
+        [Display(Name = "Your full name")]
         public string Name { get; set; }
     }
 
