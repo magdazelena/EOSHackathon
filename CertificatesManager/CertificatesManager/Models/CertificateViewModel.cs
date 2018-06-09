@@ -18,6 +18,8 @@ namespace CertificatesManager.Models
         public string Content { get; set; }
         
         public string EOSOwnerAccount { get; set; }
+
+        public string AuthorEOSPrivateKey { get; set; }
         
     }
 }
