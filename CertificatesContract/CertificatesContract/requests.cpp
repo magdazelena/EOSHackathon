@@ -3,7 +3,7 @@
 using namespace eosio;
 using namespace std;
 
-class requestsabcd : public contract {
+class requests : public contract {
 	using contract::contract;
 public:
 	requests(action_name self) : contract(self)
