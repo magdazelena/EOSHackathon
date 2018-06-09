@@ -1,36 +1,37 @@
 ﻿.jumbotron {
     padding: 15px;
+    color: #FFF9F7;
 }
 .jumbotron img{
     width: 150px;
     height: 150px;
     border-radius: 50%;
 }
-.jumbotron h1, .userCertificateList h2{
-    border-bottom: 1px solid gray;
-}
+    .jumbotron h1, .userCertificateList h2 {
+        border-bottom: 1px solid #c38d94;
+    }
 .userCertificateList h4 {
-    color: gray;
+    color: #A76571;
 }
-.userCertificateList .row{
+.userCertificateList .row {
     margin-bottom: 2em;
     padding-bottom: 2em;
-    border-bottom: 2px solid gray;
+    border-bottom: 2px solid #A76571;
 }
 .userCertificateList .confirmButton {
     display: inline-block;
     padding: 15px;
     margin-top: 2em;
-    background-color: gray;
+    background-color: #A76571;
     color: white;
     border-radius: 15px;
-    border-bottom: 2px solid lightgray;
+    border-bottom: 2px solid #C38D94;
     transition: all 1s ease;
     text-decoration: none;
     cursor: pointer;
 }
-    .userCertificateList .confirmButton:hover, .userCertificateList .confirmButton:focus{
-        background-color: lightgray;
-        border-bottom-color: gray;
+    .userCertificateList .confirmButton:hover, .userCertificateList .confirmButton:focus {
+        background-color: #C38D94;
+        border-bottom-color: #A76571;
         transition: all 1s ease;
     }
