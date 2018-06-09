@@ -12,6 +12,11 @@
 .userCertificateList h4 {
     color: gray;
 }
+.userCertificateList .row{
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 2px solid gray;
+}
 .userCertificateList .confirmButton {
     display: inline-block;
     padding: 15px;
