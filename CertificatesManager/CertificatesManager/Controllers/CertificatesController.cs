@@ -56,12 +56,19 @@ namespace CertificatesManager.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Author,PlaceOfIssue,Content,EOSAuthorAccount,EOSOwnerAccount")] Certificate certificate)
+        public ActionResult Create(CertificateViewModel certificate)
         {
             if (ModelState.IsValid)
             {
-                db.Certificates.Add(certificate);
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+                Certificate cert = new Certificate();
+                cert.Content = certificate.Content;
+                cert.EOSOwnerAccount = certificate.EOSOwnerAccount;
+                cert.Name = certificate.Name;
+                cert.PlaceOfIssue = certificate.PlaceOfIssue;
+
+                db.Certificates.Add(cert);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
