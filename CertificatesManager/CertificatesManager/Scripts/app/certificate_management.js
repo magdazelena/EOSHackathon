@@ -1,5 +1,7 @@
 ﻿$(function () {
     $('#createCertificateForm').submit(function () {
+        var author = $("#authorData").data("authorname");
+        var eosauthoraccount = $("#authorData").data("authoreosaccount");
 
         $.ajax({
             type: $(this).attr("method"),
