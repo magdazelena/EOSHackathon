@@ -20,5 +20,7 @@ namespace CertificatesManager.Models
         public string EOSAuthorAccount { get; set; }
 
         public string EOSOwnerAccount { get; set; }
+
+        public ICollection<Request> Requests { get; set; }
     }
 }

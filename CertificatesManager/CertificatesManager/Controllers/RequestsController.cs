@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CertificatesManager.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace CertificatesManager.Controllers
 {
@@ -18,6 +20,8 @@ namespace CertificatesManager.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             return View(db.Requests.ToList());
         }
 
