@@ -10,6 +10,7 @@ namespace CertificatesManager.Models
     public class ApplicationUser : IdentityUser
     {
         public string EOSAccountName { get; set; }
+        public string Name { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -81,6 +81,7 @@ namespace CertificatesManager.Models
         public string ConfirmPassword { get; set; }
 
         public string EOSAccountName { get; set; }
+        public string Name { get; set; }
     }
 
     public class ResetPasswordViewModel
