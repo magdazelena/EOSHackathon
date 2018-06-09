@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CertificatesManager.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Net.Mail;
 
 namespace CertificatesManager.Controllers
 {
@@ -106,13 +107,31 @@ namespace CertificatesManager.Controllers
               .Include("Certificate")
               .Where(x => x.Certificate.EOSOwnerAccount == user.EOSAccountName && x.Id == id)
               .SingleOrDefault();
-
+            
             if (request == null)
             {
                 return HttpNotFound();
             }
-            db.Requests.Remove(request);
+
+            request.Status = "Rejected";
+            //db.Requests.Remove(request);
             db.SaveChanges();
+
+            MailMessage mail = new MailMessage("eoshackathon@irespo.com", request.Email);
+            SmtpClient client = new SmtpClient();
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Host = "serwer1761616.home.pl";
+            client.Credentials = new NetworkCredential("eoshackathon@irespo.com", "26a;!jl@b4qB");
+            mail.Subject = "Your request has been rejected.";
+            mail.Body = "<p>Your request has been rejected.</p>"
+                  + "<p>You requested accesing certificate with id " 
+                  + request.CertificateId
+                  + "</p>";
+            mail.IsBodyHtml = true;
+            client.Send(mail);
+
             return RedirectToAction("Index");
         }
 
