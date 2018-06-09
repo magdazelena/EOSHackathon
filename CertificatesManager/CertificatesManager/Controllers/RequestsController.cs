@@ -22,7 +22,7 @@ namespace CertificatesManager.Controllers
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
-            return View(db.Requests.ToList());
+            return View(db.Requests.Include("Certificate").Where(x => x.Certificate.EOSOwnerAccount == user.EOSAccountName).ToList());
         }
 
         // GET: Requests/Details/5

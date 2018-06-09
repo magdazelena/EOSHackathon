@@ -269,7 +269,6 @@
     <Content Include="Views\Certificates\Details.cshtml" />
     <Content Include="Views\Certificates\Edit.cshtml" />
     <Content Include="Views\Certificates\Index.cshtml" />
-    <Content Include="Views\Requests\Create.cshtml" />
     <Content Include="Views\Requests\Delete.cshtml" />
     <Content Include="Views\Requests\Verify.cshtml" />
     <Content Include="Views\Requests\Index.cshtml" />
