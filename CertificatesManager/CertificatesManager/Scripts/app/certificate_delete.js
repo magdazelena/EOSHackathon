@@ -1,9 +1,14 @@
 ﻿$(function () {
-    $("#deleteForm").submit(function () {
-        var certificateId = $("#CertificateId").data(certid);
-        var privateKey = $("#AuthorEOSPrivateKey").val();
+    $("#deleteForm").submit(function (e) {
+        e.preventDefault();
 
-        eos = Eos({ keyProvider: eosauthorprivatekey, httpEndpoint: 'https://eoshackathon.eastasia.cloudapp.azure.com' })
+        var form = $(this);
+        var certificateId = $("#CertificateId").data("certid");
+        var privateKey = $("#AuthorEOSPrivateKey").val();
+        var eosauthor = $("#AuthorEos").data("authoreos");
+        var submitForm = false;
+
+        eos = Eos({ keyProvider: privateKey, httpEndpoint: 'https://eoshackathon.eastasia.cloudapp.azure.com' })
 
         eos.transaction({
             actions: [
@@ -20,6 +25,10 @@
                     }
                 }
             ]
+        }).then(function () {
+            $("#deleteForm").unbind('submit').submit();
+
         });
+       
     })
 });
