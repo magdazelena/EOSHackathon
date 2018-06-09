@@ -64,6 +64,9 @@
     <ClCompile Include="certificates.cpp" />
     <ClCompile Include="requests.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="data.txt" />
+  </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
