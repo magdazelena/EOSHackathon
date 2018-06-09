@@ -69,9 +69,9 @@ namespace CertificatesManager.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.NotFound);
         }
 
-        // GET: Requests/Delete/5
+        // GET: Requests/Reject/5
         [Authorize]
-        public ActionResult Delete(int? id)
+        public ActionResult Reject(int? id)
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
@@ -94,10 +94,10 @@ namespace CertificatesManager.Controllers
         }
 
         // POST: Requests/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Reject")]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult RejectConfirmed(int id)
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 

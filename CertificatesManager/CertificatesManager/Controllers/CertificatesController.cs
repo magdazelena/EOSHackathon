@@ -82,8 +82,8 @@ namespace CertificatesManager.Controllers
             return View(certificate);
         }
         
-        // GET: Certificates/Reject/5
-        public ActionResult Reject(int? id)
+        // GET: Certificates/Delete/5
+        public ActionResult Delete(int? id)
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
@@ -100,10 +100,10 @@ namespace CertificatesManager.Controllers
             return View(certificate);
         }
 
-        // POST: Certificates/Reject/5
-        [HttpPost, ActionName("Reject")]
+        // POST: Certificates/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult RejectConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
