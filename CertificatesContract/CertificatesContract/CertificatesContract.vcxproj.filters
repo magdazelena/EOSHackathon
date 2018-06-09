@@ -12,7 +12,7 @@
     <ClCompile Include="certificates.cpp">
       <Filter>certificates</Filter>
     </ClCompile>
-    <ClCompile Include="requestsabcd.cpp">
+    <ClCompile Include="requests.cpp">
       <Filter>requestsabcd</Filter>
     </ClCompile>
   </ItemGroup>

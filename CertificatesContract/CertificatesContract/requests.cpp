@@ -6,20 +6,19 @@ using namespace std;
 class requestsabcd : public contract {
 	using contract::contract;
 public:
-	requestsabcd(action_name self) : contract(self)
+	requests(action_name self) : contract(self)
 		, _requests(_self, _self) {}
 
 	//@abi table 
 	struct request {
 		uint64_t requestId;
-		uint64_t certificateId;
-
 		name requestor;
 		string email;
+		uint64_t certificateId;
 
 		uint64_t primary_key() const { return requestId; }
 
-		EOSLIB_SERIALIZE(request, (requestId)(certificateId)(requestor)(email))
+		EOSLIB_SERIALIZE(request, (requestId)(requestor)(email)(certificateId))
 	};
 
 	multi_index<N(request), request> _requests;
@@ -55,4 +54,4 @@ public:
 	}
 };
 
-EOSIO_ABI(requestsabcd, (addrequest)(delrequest))
+EOSIO_ABI(requests, (addrequest)(delrequest))
