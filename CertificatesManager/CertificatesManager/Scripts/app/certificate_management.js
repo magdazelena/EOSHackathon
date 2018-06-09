@@ -19,31 +19,28 @@
                 var eosowneraccount = $("#EOSOwnerAccount").val();
 
                 var hash = ecc.sha256(name + "|" + author + "|" + placeofissue + "|" + content + "|" + eosowneraccount);
-                alert(hash);
-                /*
 
-                eos = Eos({ keyProvider: '5JSYsDkyCp3p7zsMcE2Sv7Ep3gii6Vm2wL4ED4dW5j2XQSFm38S', httpEndpoint: 'http://eoshackathon.eastasia.cloudapp.azure.com:8888' })
+                eos = Eos({ keyProvider: eosauthorprivatekey, httpEndpoint: 'https://eoshackathon.eastasia.cloudapp.azure.com' })
               
                 eos.transaction({
                     actions: [
                         {
-                            account: 'requestsabcd',
-                            name: 'addrequest',
+                            account: 'certificates',
+                            name: 'addcert',
                             authorization: [{
-                                actor: 'johnjohnsons',
+                                actor: eosauthor,
                                 permission: 'active'
                             }],
                             data: {
-                                requestId: requestId,
-                                certificateId: id,
-                                requestor: eosname,
-                                email: email
+                                certificateId: certificateId,
+                                certificateHash: hash,
+                                issuer: eosauthor
                             }
                         }
                     ]
                 });
-                */
-                // $('#infomodal').modal();
+                
+                 $('#infomodal').modal();
             },
             error: function (xhr) {
                 //error occurred
