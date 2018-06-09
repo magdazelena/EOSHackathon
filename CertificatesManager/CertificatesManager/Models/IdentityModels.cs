@@ -35,14 +35,5 @@ namespace CertificatesManager.Models
         {
             return new ApplicationDbContext();
         }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            // Configure Code First to ignore PluralizingTableName convention 
-            // If you keep this convention then the generated tables will have pluralized names. 
-            modelBuilder.Entity<Request>().HasRequired(x => x.Certificate).WithMany(x => x.Requests)
-                .HasForeignKey(x => x.CertificateId);
-        }
     }
 }

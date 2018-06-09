@@ -16,7 +16,5 @@ namespace CertificatesManager.Models
         public string Email { get; set; }
 
         public string Status { get; set; }
-
-        public Certificate Certificate { get; set; }
     }
 }
