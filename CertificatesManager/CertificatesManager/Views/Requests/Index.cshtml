@@ -38,8 +38,12 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Verify", "Verify", new { id=item.Id }) |
-            @Html.ActionLink("Reject", "Reject", new { id=item.Id })
+            @if (item.Status == "NEW")
+            {
+
+                @Html.ActionLink("Verify", "Verify", new { id = item.Id }) <text> | </text>
+                @Html.ActionLink("Reject", "Reject", new { id = item.Id })
+            }
         </td>
     </tr>
 }
