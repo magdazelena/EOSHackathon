@@ -8,6 +8,8 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
+    <div id="CertificateId" data-certid="@ViewBag.CertificateId"></div>
+    <div id="AuthorEos" data-authoreos="@Model.EOSAuthorAccount"></div>
     <h4>Certificate</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -61,8 +63,19 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "deleteForm" }))
+    {
         @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <p>(This will be finally managed by Scatter)</p>
+            <label class="control-label col-md-2" for="AuthorEOSPrivateKey">EOS PrivateKey</label>
+            <div class="col-md-10">
+                <input id="AuthorEOSPrivateKey" name="AuthorEOSPrivateKey" type="password" />
+                <span class="field-validation-valid text-danger" data-valmsg-for="AuthorEOSPrivateKey" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
@@ -70,3 +83,8 @@
         </div>
     }
 </div>
+
+@section scripts{
+    <script src="~/Scripts/eos.js"></script>
+    <script src="~/Scripts/app/certificate_delete.js"></script>
+}
