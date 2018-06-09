@@ -1,4 +1,4 @@
-﻿@model CertificatesManager.Models.Certificate
+﻿@model CertificatesManager.Models.CertificateViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm( null, null, FormMethod.Post, new { id = "createCertificateForm" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Certificate</h4>
         <hr />
@@ -23,14 +23,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        
         <div class="form-group">
             @Html.LabelFor(model => model.PlaceOfIssue, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -47,13 +40,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EOSAuthorAccount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EOSAuthorAccount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EOSAuthorAccount, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.EOSOwnerAccount, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -77,4 +64,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/app/certificate_management.js"></script>
 }
