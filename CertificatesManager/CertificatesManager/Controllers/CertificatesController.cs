@@ -22,6 +22,9 @@ namespace CertificatesManager.Controllers
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
+            ViewBag.EosAccount = user.EOSAccountName;
+
+
             return View(db.Certificates
                     .Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName)
                     .ToList()
@@ -37,7 +40,8 @@ namespace CertificatesManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Certificate certificate = db.Certificates.Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName).SingleOrDefault();
+            Certificate certificate = db.Certificates
+                .Where(x => (x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName) && id == x.Id).SingleOrDefault();
 
             if (certificate == null)
             {
@@ -91,12 +95,17 @@ namespace CertificatesManager.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Certificate certificate = db.Certificates.Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName).SingleOrDefault();
+            Certificate certificate = db.Certificates
+                .Where(x => (x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName) && x.Id == id)
+                .SingleOrDefault();
 
             if (certificate == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.CertificateId = id;
+
             return View(certificate);
         }
 
@@ -107,7 +116,9 @@ namespace CertificatesManager.Controllers
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
-            Certificate certificate = db.Certificates.Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName).SingleOrDefault();
+            Certificate certificate = db.Certificates
+                .Where(x => (x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName) && x.Id == id)
+                .SingleOrDefault();
             if (certificate == null)
             {
                 return HttpNotFound();
