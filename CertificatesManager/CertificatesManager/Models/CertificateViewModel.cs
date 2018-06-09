@@ -14,6 +14,7 @@ namespace CertificatesManager.Models
         [Display(Name = "Place of issue")]
         public string PlaceOfIssue { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Certificate contents")]
         public string Content { get; set; }
         
