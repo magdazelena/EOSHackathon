@@ -1,3 +1,20 @@
 ﻿@{
     ViewBag.Title = "Certificates";
 }
+@Styles.Render("~/Content/home_index.css")
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron">
+        <h3>Hello, @User.Identity.Name !</h3>
+    </div>
+}
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron">
+        <h3>Hello! Register or sign in using the panel above.</h3>
+    </div>
+}
+
+<h1>Confirm your certificates on demand.</h1>
+<h2>Choose <span class="highlight">requests</span> to verify on demand.</h2>
+<h2>Choose <span class="highlight">certificates</span> to manage.</h2>

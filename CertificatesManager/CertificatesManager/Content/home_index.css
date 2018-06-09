@@ -1,0 +1,14 @@
+﻿body{
+    text-align: center;
+}
+.jumbotron {
+    margin-top: 30px;
+    padding: 15px;
+    color: #FFF9F7;
+}
+h1, h2 {
+    color: #A76571;
+}
+.highlight{
+    color: #565676;
+}
