@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace CertificatesManager.Controllers
 {
+    [Authorize]
     public class CertificatesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -21,17 +22,23 @@ namespace CertificatesManager.Controllers
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
-            return View(db.Certificates.ToList());
+            return View(db.Certificates
+                    .Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName)
+                    .ToList()
+                );
         }
 
         // GET: Certificates/Details/5
         public ActionResult Details(int? id)
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Certificate certificate = db.Certificates.Find(id);
+            Certificate certificate = db.Certificates.Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName).SingleOrDefault();
+
             if (certificate == null)
             {
                 return HttpNotFound();
@@ -49,12 +56,19 @@ namespace CertificatesManager.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Author,PlaceOfIssue,Content,EOSAuthorAccount,EOSOwnerAccount")] Certificate certificate)
+        public ActionResult Create(CertificateViewModel certificate)
         {
             if (ModelState.IsValid)
             {
-                db.Certificates.Add(certificate);
+                ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+                Certificate cert = new Certificate();
+                cert.Content = certificate.Content;
+                cert.EOSOwnerAccount = certificate.EOSOwnerAccount;
+                cert.Name = certificate.Name;
+                cert.PlaceOfIssue = certificate.PlaceOfIssue;
+
+                db.Certificates.Add(cert);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -96,11 +110,14 @@ namespace CertificatesManager.Controllers
         // GET: Certificates/Delete/5
         public ActionResult Delete(int? id)
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Certificate certificate = db.Certificates.Find(id);
+            Certificate certificate = db.Certificates.Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName).SingleOrDefault();
+
             if (certificate == null)
             {
                 return HttpNotFound();
@@ -113,7 +130,13 @@ namespace CertificatesManager.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Certificate certificate = db.Certificates.Find(id);
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            Certificate certificate = db.Certificates.Where(x => x.EOSAuthorAccount == user.EOSAccountName || x.EOSOwnerAccount == user.EOSAccountName).SingleOrDefault();
+            if (certificate == null)
+            {
+                return HttpNotFound();
+            }
             db.Certificates.Remove(certificate);
             db.SaveChanges();
             return RedirectToAction("Index");
