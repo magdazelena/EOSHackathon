@@ -43,7 +43,7 @@ public:
 		require_auth(issuer);
 
 		auto iterator = _certificates.find(certificateId);
-		eosio_assert(iterator != _certificates.end(), "Certificate with given Id does not exist");
+		eosio_assert(iterator != _certificates.end(), "Certificate with given Id does not exist.");
 
 		_certificates.erase(iterator);
 		

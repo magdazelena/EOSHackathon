@@ -45,7 +45,7 @@ public:
 		require_auth(requestor);
 
 		auto iterator = _requests.find(requestId);
-		eosio_assert(iterator != _requests.end(), "Request with given Id does not exist");
+		eosio_assert(iterator != _requests.end(), "Request with given Id does not exist.");
 
 		_requests.erase(iterator);
 
