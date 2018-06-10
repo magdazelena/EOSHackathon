@@ -19,4 +19,8 @@
   <ItemGroup>
     <Text Include="data.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="requests.abi" />
+    <None Include="certificates.abi" />
+  </ItemGroup>
 </Project>
