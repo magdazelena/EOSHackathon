@@ -17,7 +17,8 @@ namespace CertificatesManager.Models
         [DataType(DataType.MultilineText)]
         [Display(Name = "Certificate contents")]
         public string Content { get; set; }
-        
+
+        [Display(Name = "EOS account name of certified person")]
         public string EOSOwnerAccount { get; set; }
 
         public string AuthorEOSPrivateKey { get; set; }
