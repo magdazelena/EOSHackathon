@@ -19,3 +19,20 @@
     padding-bottom: 2em;
     border-bottom: 2px solid #A76571;
 }
+.userCertificateList .confirmButton {
+    display: inline-block;
+    padding: 15px;
+    margin-top: 2em;
+    background-color: #A76571;
+    color: white;
+    border-radius: 15px;
+    border-bottom: 2px solid #C38D94;
+    transition: all 1s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+    .userCertificateList .confirmButton:hover, .userCertificateList .confirmButton:focus {
+        background-color: #C38D94;
+        border-bottom-color: #A76571;
+        transition: all 1s ease;
+    }
